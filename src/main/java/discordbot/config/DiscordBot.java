@@ -18,11 +18,10 @@ Created by IntelliJ IDEA.
 @Configuration
 public class DiscordBot
 {
-    public JDA api;
-
     @Bean
     JDA createAPIConnection() throws LoginException
     {
-        return api = JDABuilder.createDefault(System.getenv("API_KEY")).build();
+
+        return JDABuilder.createDefault(System.getenv("API_KEY")).build();
     }
 }
