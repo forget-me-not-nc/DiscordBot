@@ -22,7 +22,7 @@ public class BotTextServiceImpl implements BotTextService
     @Autowired
     private JDA bot;
 
-    @Scheduled(cron = "*/10 * * ? * * *")
+    @Scheduled(cron = "0/30 0 0 ? * * *")
     @Override
     public void sendMessage() throws InterruptedException
     {
