@@ -21,7 +21,6 @@ public class DiscordBot
     @Bean
     JDA createAPIConnection() throws LoginException
     {
-
         return JDABuilder.createDefault(System.getenv("API_KEY")).build();
     }
 }
