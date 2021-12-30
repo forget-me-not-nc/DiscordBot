@@ -1,4 +1,13 @@
 package discordbot.services.text.impls;
+
+import net.dv8tion.jda.api.JDA;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import discordbot.services.text.BotTextService;
+import org.springframework.stereotype.Component;
+
+import java.util.concurrent.TimeUnit;
+
 /*
 Created by IntelliJ IDEA.
 @Project Name: DiscordBot 
@@ -7,17 +16,16 @@ Created by IntelliJ IDEA.
 @Version MainChain: 1.0
 */
 
-import org.springframework.scheduling.annotation.Scheduled;
-import discordbot.services.text.BotTextService;
-
+@Component
 public class BotTextServiceImpl implements BotTextService
 {
+    @Autowired
+    private JDA bot;
 
-
-    @Scheduled(cron = "*/5 * * * *")
+    @Scheduled(cron = "*/10 * * ? * * *")
     @Override
-    public void sendMessage(String message)
+    public void sendMessage() throws InterruptedException
     {
-
+        bot.awaitReady().getCategories().get(0).getTextChannels().get(2).sendMessage("a").timeout(5, TimeUnit.SECONDS).submit();
     }
 }

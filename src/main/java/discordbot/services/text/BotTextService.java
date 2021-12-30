@@ -13,5 +13,5 @@ Created by IntelliJ IDEA.
 @Service
 public interface BotTextService
 {
-    void sendMessage(String message);
+    void sendMessage() throws InterruptedException;
 }
