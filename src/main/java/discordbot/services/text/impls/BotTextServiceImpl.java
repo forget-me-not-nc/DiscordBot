@@ -26,7 +26,6 @@ public class BotTextServiceImpl implements BotTextService
     @Override
     public void sendMessage() throws InterruptedException
     {
-        System.out.println("dsdsdsd");
-        bot.awaitReady().getCategories().get(0).getTextChannels().get(2).sendMessage("a").timeout(5, TimeUnit.SECONDS).submit();
+        //bot.awaitReady().getCategories().get(0).getTextChannels().get(2).sendMessage("a").timeout(5, TimeUnit.SECONDS).submit();
     }
 }
