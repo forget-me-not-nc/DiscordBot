@@ -10,7 +10,7 @@ Created by IntelliJ IDEA.
 @Version MainChain: 1.0
 */
 
-@Service
-public interface BotImageService {
-
+public interface BotImageService
+{
+    void sendImage();
 }

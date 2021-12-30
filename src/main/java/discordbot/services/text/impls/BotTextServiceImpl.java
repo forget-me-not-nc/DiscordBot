@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import discordbot.services.text.BotTextService;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,10 +24,10 @@ public class BotTextServiceImpl implements BotTextService
     @Autowired
     private JDA bot;
 
-    @Scheduled(cron = "*/10 * * * * *")
+    //@Scheduled(cron = "*/30 * * * * *")
     @Override
     public void sendMessage() throws InterruptedException
     {
-        //bot.awaitReady().getCategories().get(0).getTextChannels().get(2).sendMessage("a").timeout(5, TimeUnit.SECONDS).submit();
+        bot.awaitReady().getCategories().get(0).getTextChannels().get(2).sendMessage("a").timeout(5, TimeUnit.SECONDS).submit();
     }
 }
