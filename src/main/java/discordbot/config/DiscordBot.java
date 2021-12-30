@@ -23,8 +23,6 @@ public class DiscordBot
     @Bean
     JDA createAPIConnection() throws LoginException
     {
-
-        return api = JDABuilder.createDefault("OTI1MzQ2MDc3MzI5MTk1MDM5.YcrxsA.NC5Y_9j43T6636j2KPN1ZDoNShY").build();
-        //return api = JDABuilder.createDefault(System.getenv("API_KEY")).build();
+        return api = JDABuilder.createDefault(System.getenv("API_KEY")).build();
     }
 }
