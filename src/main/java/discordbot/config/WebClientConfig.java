@@ -19,6 +19,6 @@ public class WebClientConfig
     @Bean
     public WebClient webClient()
     {
-        return WebClient.builder().baseUrl("http://localhost:3000").build();
+        return WebClient.builder().baseUrl("https://nsfw-ds-bot.herokuapp.com").build();
     }
 }

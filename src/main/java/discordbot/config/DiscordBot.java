@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.PostConstruct;
 import javax.security.auth.login.LoginException;
 
 /**
@@ -19,8 +20,8 @@ Created by IntelliJ IDEA.
 public class DiscordBot
 {
     @Bean
-    JDA createAPIConnection() throws LoginException
+    JDA createAPIConnection() throws LoginException, InterruptedException
     {
-        return JDABuilder.createDefault(System.getenv("API_KEY")).build();
+        return JDABuilder.createDefault(System.getenv("API_KEY")).build().awaitReady();
     }
 }
