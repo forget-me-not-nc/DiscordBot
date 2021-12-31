@@ -2,10 +2,10 @@ package discordbot.config;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.PostConstruct;
 import javax.security.auth.login.LoginException;
 
 /**
@@ -22,6 +22,8 @@ public class DiscordBot
     @Bean
     JDA createAPIConnection() throws LoginException, InterruptedException
     {
-        return JDABuilder.createDefault(System.getenv("API_KEY")).build().awaitReady();
+        return JDABuilder.createDefault(System.getenv("API_KEY"))
+                         .setActivity(Activity.playing("очке пальчиком"))
+                         .build().awaitReady();
     }
 }

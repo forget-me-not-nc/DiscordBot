@@ -1,5 +1,6 @@
 package discordbot.services.image.impls;
 
+import discordbot.config.ConnectedGuilds;
 import discordbot.services.image.BotImageService;
 import discordbot.services.random.RandomService;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -11,6 +12,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /*
@@ -33,21 +35,28 @@ public class BotImageServiceImpl implements BotImageService
     @Autowired
     private RandomService randomService;
 
+    @Autowired
+    private ConnectedGuilds guilds;
+
     @Override
     public void sendImage()
     {
         webClient.get().uri("/image").retrieve().bodyToMono(String.class).subscribe(
                 response ->
-                        bot
-                                .getTextChannelsByName("nsfw-hentai-images", true)
-                                .get(0)
-                                .sendMessageEmbeds(
-                                        new EmbedBuilder()
-                                        .setImage(response)
-                                        .setTitle(randomService.getRandomPhrase()).build()
-                                )
-                                .timeout(10, TimeUnit.SECONDS)
-                                .submit()
+                        guilds.getConnectedGuilds().forEach(
+                                el ->
+                                        Objects.requireNonNull(bot
+                                                .getGuildById(el))
+                                                .getTextChannelsByName("nsfw-hentai-images", true)
+                                                .get(0)
+                                                .sendMessageEmbeds(
+                                                    new EmbedBuilder()
+                                                            .setImage(response)
+                                                            .setTitle(randomService.getRandomPhrase()).build()
+                                                )
+                                                .timeout(10, TimeUnit.SECONDS)
+                                                .submit()
+                        )
         );
     }
 }
