@@ -54,7 +54,7 @@ public class BotImageServiceImpl implements BotImageService
                                                             .setImage(response)
                                                             .setTitle(randomService.getRandomPhrase()).build()
                                                 )
-                                                .timeout(10, TimeUnit.SECONDS)
+                                                .timeout(20, TimeUnit.SECONDS)
                                                 .submit()
                         )
         );

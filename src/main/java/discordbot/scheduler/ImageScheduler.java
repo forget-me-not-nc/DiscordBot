@@ -20,7 +20,8 @@ public class ImageScheduler
     @Autowired
     BotImageService service;
 
-    @Scheduled(cron = "0 0 0/1 * * ?")
+    //@Scheduled(cron = "0 0 0/1 * * ?")
+    @Scheduled(cron = "*/45 * * * * ?")
     public void postImage()
     {
         service.sendImage();
