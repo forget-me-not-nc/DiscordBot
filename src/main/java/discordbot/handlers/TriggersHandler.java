@@ -34,8 +34,7 @@ public class TriggersHandler extends ListenerAdapter
     public void onMessageReceived(@NotNull MessageReceivedEvent event)
     {
         String message = event.getMessage().getContentDisplay();
-        TextChannel general = event.getJDA().getTextChannelById("872952579741614092");
-        assert general != null;
+        TextChannel general = event.getJDA().getTextChannelsByName("❄общий-чат❄", true).get(0);
 
         if(Objects.requireNonNull(event.getMember()).getIdLong() == event.getJDA().getSelfUser().getIdLong()) return;
 
