@@ -29,9 +29,6 @@ public class TriggersHandler extends ListenerAdapter
     @Autowired
     TriggersService triggersService;
 
-    @Autowired
-    TextChannel general;
-
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event)
     {
@@ -51,6 +48,8 @@ public class TriggersHandler extends ListenerAdapter
         }
         else
         {
+            TextChannel general = event.getJDA().getTextChannelsByName("❄общий-чат❄", true).get(0);
+
             if(!event.getChannel().equals(general)) return;
 
             List<Trigger> allTriggers = triggersService.getAll();
