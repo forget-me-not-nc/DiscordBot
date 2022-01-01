@@ -2,7 +2,6 @@ package discordbot.services.random.impls;
 
 import discordbot.config.StringConstants;
 import discordbot.services.random.RandomService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;

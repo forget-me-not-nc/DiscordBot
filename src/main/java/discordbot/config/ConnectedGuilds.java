@@ -3,9 +3,9 @@ package discordbot.config;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Guild;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,13 +24,10 @@ public class ConnectedGuilds
     @Autowired
     JDA bot;
 
-    private List<String> connectedGuilds = null;
-
-    @PostConstruct
-    private void InitGuilds()
+    @Bean
+    public List<String> getConnectedGuilds()
     {
-        connectedGuilds = bot.getGuilds().stream().map(Guild::getId).collect(Collectors.toList());
+        return bot.getGuilds().stream().map(Guild::getId).collect(Collectors.toList());
     }
 
-    public List<String> getConnectedGuilds() { return connectedGuilds; }
 }

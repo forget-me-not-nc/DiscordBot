@@ -27,6 +27,12 @@ public class StringConstants
       "Gimme ur love",
       "Fuck yeahh",
       "Love you",
+      "Sweet..",
+      "Fit ass",
+      "Lovely smile~",
+      "Mommy",
+      "MM milfs",
+      "I want that",
       "Pretty girl~!",
       "What a beauty",
       "MMMmmmmm"

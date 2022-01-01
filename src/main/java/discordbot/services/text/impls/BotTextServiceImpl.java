@@ -1,12 +1,9 @@
 package discordbot.services.text.impls;
 
+import discordbot.services.text.BotTextService;
 import net.dv8tion.jda.api.JDA;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import discordbot.services.text.BotTextService;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.concurrent.TimeUnit;
 

@@ -1,16 +1,13 @@
 package discordbot.services.image.impls;
 
-import discordbot.config.ConnectedGuilds;
 import discordbot.services.image.BotImageService;
 import discordbot.services.random.RandomService;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.TextChannel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -36,14 +33,14 @@ public class BotImageServiceImpl implements BotImageService
     private RandomService randomService;
 
     @Autowired
-    private ConnectedGuilds guilds;
+    private List<String> connectedGuilds;
 
     @Override
     public void sendImage()
     {
         webClient.get().uri("/image").retrieve().bodyToMono(String.class).subscribe(
                 response ->
-                        guilds.getConnectedGuilds().forEach(
+                        connectedGuilds.forEach(
                                 el ->
                                         Objects.requireNonNull(bot
                                                 .getGuildById(el))

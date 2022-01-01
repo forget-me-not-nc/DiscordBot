@@ -1,7 +1,5 @@
 package discordbot.services.image;
 
-import org.springframework.stereotype.Service;
-
 /**
 Created by IntelliJ IDEA.
 @Project Name: DiscordBot 
