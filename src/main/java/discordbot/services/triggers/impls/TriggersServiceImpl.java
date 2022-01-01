@@ -24,9 +24,9 @@ public class TriggersServiceImpl implements TriggersService
     TriggersRepo triggersRepo;
 
     @Override
-    public String getByTrigger(String trigger)
+    public Trigger getByTrigger(String trigger)
     {
-        return triggersRepo.findByTrigger(trigger).getAnswer();
+        return triggersRepo.findByTrigger(trigger);
     }
 
     @Override

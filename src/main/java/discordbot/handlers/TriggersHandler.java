@@ -40,19 +40,19 @@ public class TriggersHandler extends ListenerAdapter
 
         if(Objects.requireNonNull(event.getMember()).getIdLong() == event.getJDA().getSelfUser().getIdLong()) return;
 
-        if(message.contains("~~add"))
+        if(message.contains("!!add"))
         {
             message = message.substring(6);
 
             triggersService.setTrigger(message.split("-")[0], message.split("-")[1]);
         }
-        else if(message.contains("~~remove"))
+        else if(message.contains("!!remove"))
         {
             message = message.substring(9);
 
             triggersService.deleteTrigger(message);
         }
-        else if(message.contains("~~all"))
+        else if(message.contains("!!all"))
         {
             general.sendMessage(triggersService.getAll().stream().map(
                     el -> el.getTrigger() + "-" + el.getAnswer()
@@ -74,7 +74,7 @@ public class TriggersHandler extends ListenerAdapter
 
             while (matcher.find())
             {
-                general.sendMessage(triggersService.getByTrigger(matcher.group(1))).timeout(10, TimeUnit.SECONDS).submit();
+                general.sendMessage(triggersService.getByTrigger(matcher.group(1)).getAnswer()).timeout(10, TimeUnit.SECONDS).submit();
             }
         }
     }

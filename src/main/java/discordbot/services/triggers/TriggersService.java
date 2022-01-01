@@ -15,7 +15,7 @@ import java.util.List;
 
 public interface TriggersService
 {
-    String getByTrigger(String trigger);
+    Trigger getByTrigger(String trigger);
     void setTrigger(String trigger, String answer);
     void deleteTrigger(String trigger);
     List<Trigger> getAll();
