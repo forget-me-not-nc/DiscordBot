@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
@@ -35,7 +36,7 @@ public class TriggersHandler extends ListenerAdapter
     @Override
     public void onMessageReceived(@NotNull MessageReceivedEvent event)
     {
-        String message = event.getMessage().getContentDisplay();
+        String message = event.getMessage().getContentDisplay().toLowerCase(Locale.ROOT);
         TextChannel general = event.getJDA().getTextChannelsByName("❄общий-чат❄", true).get(0);
 
         if(Objects.requireNonNull(event.getMember()).getIdLong() == event.getJDA().getSelfUser().getIdLong()) return;
