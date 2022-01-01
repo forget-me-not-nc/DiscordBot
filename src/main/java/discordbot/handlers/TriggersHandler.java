@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -33,7 +34,10 @@ public class TriggersHandler extends ListenerAdapter
     public void onMessageReceived(@NotNull MessageReceivedEvent event)
     {
         String message = event.getMessage().getContentDisplay();
-        TextChannel general = event.getJDA().getTextChannelsByName("❄общий-чат❄", true).get(0);
+        TextChannel general = event.getJDA().getTextChannelById("872952579741614092");
+        assert general != null;
+
+        if(Objects.requireNonNull(event.getMember()).getIdLong() == event.getJDA().getSelfUser().getIdLong()) return;
 
         if(message.contains("~~add"))
         {
