@@ -40,19 +40,19 @@ public class TriggersHandler extends ListenerAdapter
 
         if(Objects.requireNonNull(event.getMember()).getIdLong() == event.getJDA().getSelfUser().getIdLong()) return;
 
-        if(message.contains("!!add"))
+        if(message.contains("!!add") && message.indexOf("!!add") == 0)
         {
             message = message.substring(6);
 
             triggersService.setTrigger(message.split("-")[0], message.split("-")[1]);
         }
-        else if(message.contains("!!remove"))
+        else if(message.contains("!!remove") && message.indexOf("!!remove") == 0)
         {
             message = message.substring(9);
 
             triggersService.deleteTrigger(message);
         }
-        else if(message.contains("!!all"))
+        else if(message.contains("!!all") && message.indexOf("!!all") == 0)
         {
             general.sendMessage(triggersService.getAll().stream().map(
                     el -> el.getTrigger() + "-" + el.getAnswer()
