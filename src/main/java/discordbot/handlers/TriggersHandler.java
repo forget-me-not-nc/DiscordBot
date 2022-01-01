@@ -5,14 +5,16 @@ import discordbot.services.triggers.TriggersService;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -64,20 +66,20 @@ public class TriggersHandler extends ListenerAdapter
 
             List<Trigger> allTriggers = triggersService.getAll();
 
-            List<String> keyWords = Arrays.stream(
-                    message.split("[ /.,\";:!?()\\-“]")
-            ).distinct().collect(Collectors.toList());
+            String patternString = "\\b(" +
+                    StringUtils.join(allTriggers.stream().map(Trigger::getTrigger).collect(Collectors.toList()), "|") +
+                    ")\\b";
+            Pattern pattern = Pattern.compile(patternString);
+            Matcher matcher = pattern.matcher(message);
 
-            keyWords.forEach(
-                    keyWord -> allTriggers.stream()
-                            .filter(el -> el.getTrigger().equals(keyWord))
-                            .findFirst().ifPresent(
-                            trigger -> general.sendMessage(trigger.getAnswer())
-                                        .timeout(10, TimeUnit.SECONDS).submit()
-                    )
-            );
-
+            while (matcher.find())
+            {
+                general.sendMessage(triggersService.getByTrigger(matcher.group(1))).timeout(10, TimeUnit.SECONDS).submit();
+            }
         }
     }
+
+
+
 
 }
