@@ -33,6 +33,7 @@ public class TriggersHandler extends ListenerAdapter
     public void onMessageReceived(@NotNull MessageReceivedEvent event)
     {
         String message = event.getMessage().getContentDisplay();
+        TextChannel general = event.getJDA().getTextChannelsByName("❄общий-чат❄", true).get(0);
 
         if(message.contains("~~add"))
         {
@@ -46,10 +47,16 @@ public class TriggersHandler extends ListenerAdapter
 
             triggersService.deleteTrigger(message);
         }
+        else if(message.contains("~~all"))
+        {
+            general.sendMessage(triggersService.getAll().stream().map(
+                    el -> el.getTrigger() + "-" + el.getAnswer()
+            ).collect(Collectors.joining("\n")))
+            .timeout(20, TimeUnit.SECONDS)
+            .submit();
+        }
         else
         {
-            TextChannel general = event.getJDA().getTextChannelsByName("❄общий-чат❄", true).get(0);
-
             if(!event.getChannel().equals(general)) return;
 
             List<Trigger> allTriggers = triggersService.getAll();
